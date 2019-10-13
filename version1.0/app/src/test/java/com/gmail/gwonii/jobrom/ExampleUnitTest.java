@@ -1,4 +1,4 @@
-package com.gmail.gwonii.ptj1;
+package com.gmail.gwonii.jobrom;
 
 import org.junit.Test;
 

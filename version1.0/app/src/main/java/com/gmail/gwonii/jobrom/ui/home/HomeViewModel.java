@@ -1,4 +1,4 @@
-package com.gmail.gwonii.ptj1.ui.home;
+package com.gmail.gwonii.jobrom.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

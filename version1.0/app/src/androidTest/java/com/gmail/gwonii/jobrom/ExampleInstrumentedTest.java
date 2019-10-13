@@ -1,4 +1,4 @@
-package com.gmail.gwonii.ptj1;
+package com.gmail.gwonii.jobrom;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.gmail.gwonii.ptj1", appContext.getPackageName());
+        assertEquals("com.gmail.gwonii.jobrom", appContext.getPackageName());
     }
 }

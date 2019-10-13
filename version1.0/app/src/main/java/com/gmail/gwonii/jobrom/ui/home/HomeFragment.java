@@ -1,4 +1,4 @@
-package com.gmail.gwonii.ptj1.ui.home;
+package com.gmail.gwonii.jobrom.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.gmail.gwonii.ptj1.R;
+import com.gmail.gwonii.jobrom.R;
 
 public class HomeFragment extends Fragment {
 
