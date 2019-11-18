@@ -1,4 +1,4 @@
-package com.gmail.gwonii.jobrom.ui.search;
+package com.gmail.gwonii.jobrom.ui.setting;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,21 +14,22 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.gmail.gwonii.jobrom.R;
 
-public class SearchFragment extends Fragment {
 
-    private SearchViewModel searchViewModel;
+public class SettingFragment extends Fragment {
+
+    private SettingViewModel settingViewModel;
     private TextView textView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        searchViewModel =
-                ViewModelProviders.of(this).get(SearchViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        settingViewModel =
+                ViewModelProviders.of(this).get(SettingViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_setting, container, false);
 
 
         //        textView = root.findViewById(R.id.text_home);
 
-        searchViewModel.getText().observe(this, new Observer<String>() {
+        settingViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 //                textView.setText(s);

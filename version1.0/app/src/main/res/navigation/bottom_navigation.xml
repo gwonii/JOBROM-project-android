@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@+id/bottom_nav_send">
+    app:startDestination="@+id/bottom_nav_home">
+
 
     <fragment
         android:id="@+id/bottom_nav_home"
         android:name="com.gmail.gwonii.jobrom.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+    </fragment>
 
     <fragment
-        android:id="@+id/bottom_nav_send"
-        android:name="com.gmail.gwonii.jobrom.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/bottom_nav_explore"
+        android:name="com.gmail.gwonii.jobrom.ui.explore.ExploreFragment"
+        android:label="@string/menu_explore"
+        tools:layout="@layout/fragment_explore" />
 
     <fragment
-        android:id="@+id/bottom_nav_share"
-        android:name="com.gmail.gwonii.jobrom.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/bottom_nav_search"
+        android:name="com.gmail.gwonii.jobrom.ui.search.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/bottom_nav_myjob"
+        android:name="com.gmail.gwonii.jobrom.ui.myjob.MyJobFragment"
+        android:label="@string/menu_myjob"
+        tools:layout="@layout/fragment_myjob" />
 
 </navigation>

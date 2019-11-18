@@ -21,8 +21,6 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.gmail.gwonii.jobrom.R;
-import com.gmail.gwonii.jobrom.ui.gallery.GalleryFragment;
-import com.gmail.gwonii.jobrom.ui.home.HomeFragment;
 import com.gmail.gwonii.jobrom.ui.share.ShareFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,18 +30,9 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    private GalleryFragment galleryFragment = new GalleryFragment();
-    private ShareFragment shareFragment = new ShareFragment();
-    private HomeFragment homeFragment = new HomeFragment();
-
-    private DrawerLayout drawer;
-
+    private NavController navController;
 
     private MenuItem mSearch;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,31 +42,34 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home)
                 .setDrawerLayout(drawer)
                 .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+//        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+//        NavigationUI.setupWithNavController(navigationView, navController);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         // bottomNavigation 설정
-        setBottomNavigation();
+//        setBottomNavigation();
 
         // searchbar 설정
-
-
 
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
@@ -87,19 +79,18 @@ public class MainActivity extends AppCompatActivity {
         mSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                TextView text = findViewById(R.id.txtstatus);
-                text.setText("현재 상태 : 확장됨");
+//                TextView text = findViewById(R.id.txtstatus);
+//                text.setText("현재 상태 : 확장됨");
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                TextView text=(TextView)findViewById(R.id.txtstatus);
-                text.setText("현재 상태 : 축소됨");
+//                TextView text=(TextView)findViewById(R.id.txtstatus);
+//                text.setText("현재 상태 : 축소됨");
                 return true;
             }
         });
-
 
         //menuItem을 이용해서 SearchView 변수 생성
         SearchView sv=(SearchView)mSearch.getActionView();
@@ -112,16 +103,24 @@ public class MainActivity extends AppCompatActivity {
             //검색버튼을 눌렀을 경우
             @Override
             public boolean onQueryTextSubmit(String query) {
-                TextView text = (TextView)findViewById(R.id.txtresult);
-                text.setText(query + "를 검색합니다.");
+//                TextView text = (TextView)findViewById(R.id.txtresult);
+//                text.setText(query + "를 검색합니다.");
+
+                TextView text = findViewById(R.id.txtresult);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("search_contents", text.getText().toString());
+                navController.popBackStack();
+                navController.navigate(R.id.nav_share, bundle);
+
                 return true;
             }
 
             //텍스트가 바뀔때마다 호출
             @Override
             public boolean onQueryTextChange(String newText) {
-                TextView text = (TextView)findViewById(R.id.txtsearch);
-                text.setText("검색식 : "+newText);
+//                TextView text = (TextView)findViewById(R.id.txtsearch);
+//                text.setText("검색식 : "+newText);
                 return true;
             }
         });
@@ -138,38 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setBottomNavigation() {
 
-/*
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.nav_host_fragment, homeFragment).commitAllowingStateLoss();
-*/
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-
-    }
-
-    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-/*            switch(menuItem.getItemId())
-            {
-                case R.id.nav_home:
-                    transaction.replace(R.id.nav_host_fragment, homeFragment).commitAllowingStateLoss();
-                    drawer.closeDrawer(GravityCompat.START);
-                    break;
-                case R.id.nav_gallery:
-                    transaction.replace(R.id.nav_host_fragment, galleryFragment).commitAllowingStateLoss();
-                    drawer.closeDrawer(GravityCompat.START);
-                    break;
-                case R.id.nav_share:
-                    transaction.replace(R.id.nav_host_fragment, shareFragment).commitAllowingStateLoss();
-                    drawer.closeDrawer(GravityCompat.START);
-                    break;
-            }*/
-            return true;
-        }
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
     }
 }
