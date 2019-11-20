@@ -30,7 +30,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
-
 public class MyJobFragment extends Fragment {
 
     public static String TAG = "jobList data read";
@@ -72,7 +71,7 @@ public class MyJobFragment extends Fragment {
             public void onClick(View v) {
 
                 readJobData();
-//                addJob();
+                addJob();
 
 
             }
@@ -110,43 +109,39 @@ public class MyJobFragment extends Fragment {
             while (index < jsonArray.length()) {
 
                 JobModel jobModel = gson.fromJson(jsonArray.get(index).toString(), JobModel.class);
+                jobModel.setJobId(index);
 
                 jobList.add(jobModel);
-
                 index++;
             }
 
-            Log.d(TAG, jobList.get(0).toString());
-
+            for (int i = 0; i < jobList.size(); i++) {
+                Log.d(TAG, jobList.get(i).toString());
+            }
 
         } catch (Exception e) {
-
             e.printStackTrace();
-
         }
-
-
     }
 
     private void addJob() {
-        String name = jobName.getText().toString();
-        String ability = jobAbility.getText().toString();
-        String salary = jobSalary.getText().toString();
 
-        if (!name.isEmpty() && !ability.isEmpty() && !salary.isEmpty()) {
+//        String name = jobName.getText().toString();
+//        String ability = jobAbility.getText().toString();
+//        String salary = jobSalary.getText().toString();
+
 
 //            String id = databaseJob.push().getKey();
 
-            JobModel jobData = new JobModel(name, ability, salary);
+//            JobModel jobData = new JobModel(name, ability, salary);
 
-            databaseJob.child("jobs").child(Integer.toString(jobData.getJobId())).setValue(jobData);
+        for (int i = 0; i < jobList.size(); i++) {
 
-
-            Toast.makeText(this.getContext(), "added job", Toast.LENGTH_LONG).show();
-
-        } else {
-            Toast.makeText(this.getContext(), "please input data", Toast.LENGTH_LONG).show();
+            databaseJob.child("jobs").child(Integer.toString(jobList.get(i).getJobId())).setValue(jobList.get(i));
         }
+
+        Toast.makeText(this.getContext(), "added job", Toast.LENGTH_LONG).show();
+
     }
 
 }
