@@ -8,14 +8,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <Button
+            android:id="@+id/bt_enroll_job_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is MyJob" />
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:background="@drawable/box_round_button_brown"
+            android:text="@string/tempText"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 

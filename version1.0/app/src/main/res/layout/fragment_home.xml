@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main_banner"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:background="@drawable/box_rectangle_red_bright"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/main_banner"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
 
 
     <ScrollView
@@ -11,7 +31,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/main_banner">
 
 
         <LinearLayout
@@ -19,65 +39,129 @@
             android:layout_height="400dp"
             android:orientation="vertical">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                android:elevation="8dp"
-                android:background="@drawable/design_round_box">
+                android:background="@drawable/box_round_bin"
+                android:elevation="4dp"
+                android:orientation="horizontal">
 
-            </ImageView>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="48dp"
+                    android:src="@drawable/img_explore"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="32dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_title_explore"
+                        android:textSize="28sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/main_body_explore"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_weight="1"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="4dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_marginBottom="8dp"
-                    android:elevation="8dp"
-                    android:background="@drawable/design_round_box">
-                </ImageView>
+                    android:layout_weight="1"
+                    android:background="@drawable/box_round_bin"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
 
-                <ImageView
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/img_job_search"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/main_title_search"
+                            android:textSize="16sp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_weight="1"
-                    android:layout_marginRight="16dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp"
-                    android:elevation="8dp"
-                    android:background="@drawable/design_round_box">
-                </ImageView>
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/box_round_bin"
+                    android:elevation="4dp"
+                    >
+
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/img_news"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/main_title_news"
+                        android:textSize="16sp"/>
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <ImageView
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="#4F4444" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-
-
-
-            </LinearLayout>
+                android:layout_height="3dp"
+                android:background="#E3DFDF"/>
 
         </LinearLayout>
+
+
+
 
     </ScrollView>
 
