@@ -78,6 +78,7 @@ public class GalleryFragment extends Fragment {
 
             databaseJob.child("jobs").child(Integer.toString(jobData.getJobId())).setValue(jobData);
 
+
             Toast.makeText(this.getContext(), "added job", Toast.LENGTH_LONG).show();
 
         } else {

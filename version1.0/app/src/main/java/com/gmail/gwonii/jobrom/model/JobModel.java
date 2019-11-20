@@ -3,31 +3,39 @@ package com.gmail.gwonii.jobrom.model;
 public class JobModel {
 
     private static int jobId = 0;
-    private String jobName;
-    private String jobAbility;
-    private String jobSalery;
+    private String name;
+    private String ability;
+    private String salary;
 
-    public JobModel(String jobName, String jobAbility, String jobSalery) {
+    public JobModel(String name, String ability, String salary) {
         jobId++;
-        this.jobName = jobName;
-        this.jobAbility = jobAbility;
-        this.jobSalery = jobSalery;
+        this.name = name;
+        this.ability = ability;
+        this.salary = salary;
     }
-
 
     public int getJobId() {
         return jobId;
     }
 
     public String getJobName() {
-        return jobName;
+        return name;
     }
 
     public String getJobAbility() {
-        return jobAbility;
+        return ability;
     }
 
-    public String getJobSalery() {
-        return jobSalery;
+    public String getSalary() {
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "JobModel{" +
+                "name='" + name + '\'' +
+                ", ability='" + ability + '\'' +
+                ", salary='" + salary + '\'' +
+                '}';
     }
 }
