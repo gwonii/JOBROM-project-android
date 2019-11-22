@@ -54,13 +54,13 @@ public class SearchResultFragment extends Fragment {
 
         // database에서 가져온 데이터를 recyclerView에 넣어줘야 한다.
 
-        jobArrayList.add(new JobModel("축구선수", "민첩함,순발력,근육짱짱맨","2445만원"));
-        jobArrayList.add(new JobModel("프로그래머", "호권이 같은 실력자","4445만원"));
-        jobArrayList.add(new JobModel("디자이너", "호권이 같은 예술감각","5445만원"));
-        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
-        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
-        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
-        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
+//        jobArrayList.add(new JobModel("축구선수", "민첩함,순발력,근육짱짱맨","2445만원"));
+//        jobArrayList.add(new JobModel("프로그래머", "호권이 같은 실력자","4445만원"));
+//        jobArrayList.add(new JobModel("디자이너", "호권이 같은 예술감각","5445만원"));
+//        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
+//        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
+//        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
+//        jobArrayList.add(new JobModel("야구선수", "민첩함,순발력,팔짱짱맨","4315만원"));
 
         jobAdapter.notifyDataSetChanged();
 

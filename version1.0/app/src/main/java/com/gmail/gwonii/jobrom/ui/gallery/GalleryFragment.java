@@ -1,7 +1,9 @@
 package com.gmail.gwonii.jobrom.ui.gallery;
 
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,74 +18,94 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gmail.gwonii.jobrom.R;
+import com.gmail.gwonii.jobrom.controller.AppHelper;
 import com.gmail.gwonii.jobrom.model.JobModel;
+import com.gmail.gwonii.jobrom.ui.myjob.MyJobViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class GalleryFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
-
-    private EditText jobName;
-    private EditText jobAbility;
-    private EditText jobSalery;
-    private Button enrollButton;
+    public static String TAG = "jobList data read";
 
     private DatabaseReference databaseJob;
 
+    private MyJobViewModel myJobViewModel;
+
+    private ArrayList<JobModel> jobList;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        databaseJob = FirebaseDatabase.getInstance().getReference();
-
-        jobName = root.findViewById(R.id.et_job_name);
-        jobAbility = root.findViewById(R.id.et_job_ability);
-        jobSalery = root.findViewById(R.id.et_job_salery);
-
-        enrollButton = root.findViewById(R.id.bt_enroll_data);
-
-        galleryViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
-        });
-
-
-        enrollButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                addJob();
-            }
-        });
+        AppHelper.databaseJob = FirebaseDatabase.getInstance().getReference();
 
         return root;
     }
 
-    private void addJob() {
-        String name = jobName.getText().toString();
-        String ability = jobAbility.getText().toString();
-        String salery = jobSalery.getText().toString();
+    private void readJobData() {
 
-        if (!name.isEmpty() && !ability.isEmpty() && !salery.isEmpty()) {
+        jobList = new ArrayList<>();
+        Gson gson = new Gson();
 
-//            String id = databaseJob.push().getKey();
+        try {
 
-            JobModel jobData = new JobModel(name, ability, salery);
+            AssetManager am = getResources().getAssets();
 
-            databaseJob.child("jobs").child(Integer.toString(jobData.getJobId())).setValue(jobData);
+            InputStream is = am.open("total_job_data.json");
+
+            byte[] buffer = new byte[is.available()];
+
+            is.read(buffer);
 
 
-            Toast.makeText(this.getContext(), "added job", Toast.LENGTH_LONG).show();
+            String json = new String(buffer, "UTF-8");
 
-        } else {
-            Toast.makeText(this.getContext(), "please input data", Toast.LENGTH_LONG).show();
+            JSONObject jsonObject = new JSONObject(json);
+
+            JSONArray jsonArray = jsonObject.getJSONArray("total_job_data");
+
+            int index = 0;
+
+            while (index < jsonArray.length()) {
+
+                JobModel jobModel = gson.fromJson(jsonArray.get(index).toString(), JobModel.class);
+                jobModel.setJobId(index);
+
+                jobList.add(jobModel);
+                index++;
+            }
+
+
+            for (int i = 0; i < jobList.size(); i++) {
+                Log.d(TAG, jobList.get(i).toString());
+            }
+
+            is.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    private void addJob() {
+
+
+        for (int i = 0; i < jobList.size(); i++) {
+
+            databaseJob.child("total_jobs").child(Integer.toString(jobList.get(i).getJobId())).setValue(jobList.get(i));
+        }
+
+        Toast.makeText(this.getContext(), "added job", Toast.LENGTH_LONG).show();
+
+    }
+
 }
 
