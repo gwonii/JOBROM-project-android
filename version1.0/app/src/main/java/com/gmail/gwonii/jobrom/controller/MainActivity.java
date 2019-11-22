@@ -1,36 +1,28 @@
 package com.gmail.gwonii.jobrom.controller;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.TextView;
-
 import com.gmail.gwonii.jobrom.R;
-import com.gmail.gwonii.jobrom.ui.share.ShareFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private NavController navController;
+//    private NavController navController;
+
 
     private MenuItem mSearch;
 
@@ -52,13 +44,16 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        // NavController 전역변수 만들기
+//        navController = AppHelper.navController;
+        AppHelper.navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
 
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(bottomNavigationView, AppHelper.navController);
 
         // bottomNavigation 설정
 //        setBottomNavigation();
@@ -93,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //menuItem을 이용해서 SearchView 변수 생성
-        SearchView sv=(SearchView)mSearch.getActionView();
+        SearchView sv = (SearchView) mSearch.getActionView();
         //확인버튼 활성화
         sv.setSubmitButtonEnabled(true);
 
@@ -110,8 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("search_contents", text.getText().toString());
-                navController.popBackStack();
-                navController.navigate(R.id.nav_share, bundle);
+
+                AppHelper.navController.popBackStack();
+                AppHelper.navController.navigate(R.id.nav_share, bundle);
 
                 return true;
             }
@@ -138,6 +134,6 @@ public class MainActivity extends AppCompatActivity {
     private void setBottomNavigation() {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(bottomNavigationView, AppHelper.navController);
     }
 }

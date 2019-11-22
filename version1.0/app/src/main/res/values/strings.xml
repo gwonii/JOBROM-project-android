@@ -5,11 +5,16 @@
 
     <!--    navigation-->
 
+        <!-- bottom navigation-->
     <string name="menu_home">Home</string>
     <string name="menu_myjob">MyJob</string>
     <string name="menu_search">Search</string>
     <string name="menu_setting">Setting</string>
     <string name="menu_explore">Explore</string>
+
+        <!--  navigation page-->
+
+    <string name="page_search_result">Search Result</string>
 
 
     <string name="menu_gallery">Gallery</string>
@@ -17,6 +22,8 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+
 
 
     <!--    fragment_home-->
