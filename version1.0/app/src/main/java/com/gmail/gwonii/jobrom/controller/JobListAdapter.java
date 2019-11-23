@@ -31,6 +31,21 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         protected TextView summary;
         protected TextView salary;
 
+        protected String deliveredName;
+        protected String deliveredSummary;
+        protected String deliveredSalary;
+        protected String deliveredDivision;
+        protected String deliveredAbility;
+        protected String deliveredPreparation;
+        protected String deliveredEquality;
+        protected String deliveredPotential;
+        protected String deliveredOutlook;
+        protected String deliveredEnvironment;
+        protected String deliveredRequiredAbility;
+        protected String deliveredKnowledge;
+
+
+
         public TextView getName() {
             return name;
         }
@@ -41,6 +56,54 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
 
         public TextView getSalary() {
             return salary;
+        }
+
+        public String getDeliveredName() {
+            return deliveredName;
+        }
+
+        public String getDeliveredSummary() {
+            return deliveredSummary;
+        }
+
+        public String getDeliveredSalary() {
+            return deliveredSalary;
+        }
+
+        public String getDeliveredDivision() {
+            return deliveredDivision;
+        }
+
+        public String getDeliveredAbility() {
+            return deliveredAbility;
+        }
+
+        public String getDeliveredPreparation() {
+            return deliveredPreparation;
+        }
+
+        public String getDeliveredEquality() {
+            return deliveredEquality;
+        }
+
+        public String getDeliveredPotential() {
+            return deliveredPotential;
+        }
+
+        public String getDeliveredOutlook() {
+            return deliveredOutlook;
+        }
+
+        public String getDeliveredEnvironment() {
+            return deliveredEnvironment;
+        }
+
+        public String getDeliveredRequiredAbility() {
+            return deliveredRequiredAbility;
+        }
+
+        public String getDeliveredKnowledge() {
+            return deliveredKnowledge;
         }
 
         public JobListViewHolder(View view ) {
@@ -102,6 +165,20 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         viewholder.name.setText(jobList.get(position).getName());
         viewholder.summary.setText(jobList.get(position).getSummary());
         viewholder.salary.setText("평균연봉 " +jobList.get(position).getSalary() + " 만원");
+
+
+        viewholder.deliveredName = jobList.get(position).getName();
+        viewholder.deliveredSummary = jobList.get(position).getSummary();
+        viewholder.deliveredSalary = jobList.get(position).getSalary();
+        viewholder.deliveredDivision = jobList.get(position).getDivision();
+        viewholder.deliveredAbility = jobList.get(position).getAbility();
+        viewholder.deliveredPreparation = jobList.get(position).getPreparation();
+        viewholder.deliveredEquality = jobList.get(position).getEquality();
+        viewholder.deliveredPotential = jobList.get(position).getPotential();
+        viewholder.deliveredOutlook = jobList.get(position).getOutlook();
+        viewholder.deliveredEnvironment = jobList.get(position).getEnvironment();
+        viewholder.deliveredRequiredAbility = jobList.get(position).getRequiredAbility();
+        viewholder.deliveredKnowledge = jobList.get(position).getKnowledge();
 
     }
 

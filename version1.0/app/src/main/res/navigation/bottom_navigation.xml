@@ -36,12 +36,28 @@
         android:id="@+id/nav_search_result"
         android:name="com.gmail.gwonii.jobrom.ui.searchresult.SearchResultFragment"
         android:label="@string/page_search_result"
-        tools:layout="@layout/fragment_search_result"/>
+        tools:layout="@layout/fragment_search_result">
+
+        <action
+            android:id="@+id/action_nav_search_result_to_nav_job_detail"
+            app:destination="@id/nav_job_detail">
+
+            <argument
+                android:name="name"
+                app:argType="string" />
+            <argument android:name="summary"
+                app:argType="string" />
+            <argument android:name="salary"
+                app:argType="string" />
+        </action>
+
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_job_detail"
         android:name="com.gmail.gwonii.jobrom.ui.jobdetail.JobDetailFragment"
         android:label="@string/page_job_detail"
-        tools:layout="@layout/fragment_job_detail"/>
+        tools:layout="@layout/fragment_job_detail" />
 
 </navigation>

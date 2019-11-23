@@ -21,6 +21,7 @@ import com.gmail.gwonii.jobrom.controller.AppHelper;
 import com.gmail.gwonii.jobrom.controller.JobListAdapter;
 import com.gmail.gwonii.jobrom.model.JobListModel;
 import com.gmail.gwonii.jobrom.model.JobModel;
+import com.gmail.gwonii.jobrom.ui.jobdetail.JobDetailFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,16 +43,36 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
     RecyclerView jobRecyclerView;
 
-
-//    private Button moreButton;
+    //    private Button moreButton;
     TextView totalJobNum;
-
 
     // recyclerView clickListener
     @Override
     public void onItemSelected(View v, int position) {
-        JobListAdapter.JobListViewHolder viewHolder = (JobListAdapter.JobListViewHolder)jobRecyclerView.findViewHolderForAdapterPosition(position);
-        Toast.makeText(getContext(), "전달되었습니다" + viewHolder.getName().getText(), Toast.LENGTH_SHORT).show();
+        JobListAdapter.JobListViewHolder viewHolder = (JobListAdapter.JobListViewHolder) jobRecyclerView.findViewHolderForAdapterPosition(position);
+
+
+        String name = viewHolder.getDeliveredName();
+        String division = viewHolder.getDeliveredDivision();
+        String salary = viewHolder.getDeliveredSalary();
+
+        // to -> nav_job_detail
+
+        Bundle bundle = new Bundle();
+        bundle.putString("name", name);
+        bundle.putString("division", division);
+        bundle.putString("salary", salary);
+
+        AppHelper.navController.navigate(R.id.action_nav_search_result_to_nav_job_detail, bundle);
+
+
+
+//        SearchResultFragmentDirections.ActionNavSearchResultToNavJobDetail action = SearchResultFragmentDirections.actionNavSearchResultToNavJobDetail(name, summary, salary);
+//        AppHelper.navController.navigate(action);
+
+//        ConfirmationAction action = SpecifyAmountFragmentDirections.confirmationAction()
+//        action.setAmount(amount)
+//        Navigation.findNavController(view).navigate(action);
     }
 
 
@@ -60,6 +81,8 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
         // inflate
         View root = inflater.inflate(R.layout.fragment_search_result, container, false);
+
+
 
         // view연결하기
 //        moreButton = root.findViewById(R.id.bt_more);
@@ -105,9 +128,6 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
         // itemClicked
 
 
-
-
-
         // firebase에서 data 읽어오는 부분
 
         ValueEventListener postListener = new ValueEventListener() {
@@ -119,11 +139,11 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
                     if (count == 10) {
                         break;
                     } else {
-                        JobModel jm = snapshot.getValue(JobModel.class);
+                        JobListModel jm = snapshot.getValue(JobListModel.class);
 
                         if (jm != null) {
-                            jobListModelArrayList.add(new JobListModel(jm.getName(), jm.getSummary(), jm.getSalary()));
-
+//                            jobListModelArrayList.add(new JobListModel(jm.getName(), jm.getSummary(), jm.getSalary(), jm.getDivision()));
+                            jobListModelArrayList.add(snapshot.getValue(JobListModel.class));
                         }
 
                         Log.d(TAG, jobListModelArrayList.get(count).toString());
@@ -134,7 +154,7 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
                 }
 
-                String total_num = "총 인원 "+ dataSnapshot.child("total_jobs").getChildrenCount();
+                String total_num = "총 인원 " + dataSnapshot.child("total_jobs").getChildrenCount();
                 totalJobNum.setText(total_num);
 
             }
@@ -146,7 +166,6 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
         };
 
         AppHelper.databaseJob.addValueEventListener(postListener);
-
 
 
         jobAdapter.notifyDataSetChanged();
