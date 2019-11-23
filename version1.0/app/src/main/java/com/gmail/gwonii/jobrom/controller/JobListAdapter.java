@@ -1,5 +1,7 @@
 package com.gmail.gwonii.jobrom.controller;
 
+import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,31 +13,62 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.gwonii.jobrom.R;
-import com.gmail.gwonii.jobrom.model.JobModel;
+import com.gmail.gwonii.jobrom.model.JobListModel;
 
 import java.util.ArrayList;
 
 public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListViewHolder> {
 
-    private ArrayList<JobModel> jobList;
+    private ArrayList<JobListModel> jobList;
+    private int count = 0;
+    private OnListItemSelectedInterface mListener;
+    private Context mContext;
 
+
+    public interface OnListItemSelectedInterface {
+        void onItemSelected(View v, int position);
+    }
+
+    public JobListAdapter(Context context ,OnListItemSelectedInterface listener) {
+        this.mContext = context;
+        this.mListener = listener;
+    }
 
     public class JobListViewHolder extends RecyclerView.ViewHolder {
         protected TextView name;
-        protected TextView ability;
+        protected TextView summary;
         protected TextView salary;
 
 
-        public JobListViewHolder(View view) {
+        public JobListViewHolder(View view ) {
 
             super(view);
             this.name = view.findViewById(R.id.tv_search_result_job_name);
-            this.ability = view.findViewById(R.id.tv_search_result_job_body);
+            this.summary = view.findViewById(R.id.tv_search_result_job_body);
             this.salary = view.findViewById(R.id.tv_search_result_job_salary);
+
+            this.mlis
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("Recyclerview", "position = "+ getAdapterPosition());
+
+                }
+            });
+
+
+            // LongClick에 대한 처리도 할 수 있다.
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return false;
+                }
+            });
         }
     }
 
-    public JobListAdapter(ArrayList<JobModel> list) {
+    public JobListAdapter(ArrayList<JobListModel> list) {
         this.jobList = list;
     }
 
@@ -62,12 +95,15 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
 //        viewholder.korean.setGravity(Gravity.CENTER);
 
         viewholder.name.setText(jobList.get(position).getName());
-        viewholder.ability.setText(jobList.get(position).getAbility());
-        viewholder.salary.setText(jobList.get(position).getSalary());
+        viewholder.summary.setText(jobList.get(position).getSummary());
+        viewholder.salary.setText("평균연봉 " +jobList.get(position).getSalary() + " 만원");
+
+
     }
 
     @Override
     public int getItemCount() {
+
         return (null != jobList ? jobList.size() : 0);
     }
 

@@ -18,18 +18,6 @@ public class JobModel {
 
 
     public JobModel() {
-        this.name = "";
-        this.division = "";
-        this.ability = "";
-        this.preparation = "";
-        this.summary = "";
-        this.salary = "";
-        this.equality = "";
-        this.potential = "";
-        this.outlook = "";
-        this.environment = "";
-        this.requiredAbility = "";
-        this.knowledge = "";
     }
 
     public JobModel(String name, String division, String ability, String preparation, String summary, String salary, String equality, String potential, String outlook, String environment, String requiredAbility, String knowledge) {
