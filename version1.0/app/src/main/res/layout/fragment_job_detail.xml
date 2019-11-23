@@ -24,20 +24,31 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_job_title"
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tempText"
-                    android:textSize="32sp" />
+                    android:textSize="32sp"
+                    android:layout_marginTop="16dp"/>
 
                 <TextView
-                    android:id="@+id/tv_job_division"
+                    android:id="@+id/tv_division"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/tempText"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/tv_salary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/tempText"
+                    android:textSize="20sp"
+                    android:layout_marginTop="8dp"/>
 
 
                 <!--                equality 부분-->
@@ -50,7 +61,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
+                        android:layout_margin="16dp"
                         android:layout_weight="1"
                         android:background="@drawable/box_round_blue_bin"
                         android:orientation="vertical">
@@ -63,7 +74,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="2dp"
                             android:layout_marginBottom="4dp"
-                            android:text="@string/tempText"
+                            android:text="@string/text_equality"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -74,6 +85,7 @@
                             android:background="#E5E5E5" />
 
                         <TextView
+                            android:id="@+id/tv_equality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -93,7 +105,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
+                        android:layout_margin="16dp"
                         android:layout_weight="1"
                         android:background="@drawable/box_round_blue_bin"
                         android:orientation="vertical">
@@ -106,7 +118,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="2dp"
                             android:layout_marginBottom="4dp"
-                            android:text="@string/tempText"
+                            android:text="@string/text_potential"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -117,6 +129,7 @@
                             android:background="#E5E5E5" />
 
                         <TextView
+                            android:id="@+id/tv_potential"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -136,7 +149,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
+                        android:layout_margin="16dp"
                         android:layout_weight="1"
                         android:background="@drawable/box_round_blue_bin"
                         android:orientation="vertical">
@@ -149,7 +162,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="2dp"
                             android:layout_marginBottom="4dp"
-                            android:text="@string/tempText"
+                            android:text="@string/text_outlook"
                             android:textColor="@android:color/white"
                             android:textSize="12sp"
                             android:textStyle="bold" />
@@ -160,6 +173,7 @@
                             android:background="#E5E5E5" />
 
                         <TextView
+                            android:id="@+id/tv_outlook"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -197,11 +211,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tempText"
+                    android:text="@string/text_summary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_summary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -231,11 +246,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tempText"
+                    android:text="@string/text_environment"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_environment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -265,11 +281,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tempText"
+                    android:text="@string/text_required_ability"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_requred_ability"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -288,6 +305,8 @@
                 android:background="#E5E5E5" />
 
 
+            <!--      preparation 준비과정 부분      -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -299,11 +318,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tempText"
+                    android:text="@string/text_preparation"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_preparation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

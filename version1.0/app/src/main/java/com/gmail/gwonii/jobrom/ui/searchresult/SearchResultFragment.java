@@ -1,27 +1,21 @@
 package com.gmail.gwonii.jobrom.ui.searchresult;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.gmail.gwonii.jobrom.R;
 import com.gmail.gwonii.jobrom.controller.AppHelper;
 import com.gmail.gwonii.jobrom.controller.JobListAdapter;
 import com.gmail.gwonii.jobrom.model.JobListModel;
 import com.gmail.gwonii.jobrom.model.JobModel;
-import com.gmail.gwonii.jobrom.ui.jobdetail.JobDetailFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,6 +34,7 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
     private ArrayList<JobListModel> jobListModelArrayList;
     private JobListAdapter jobAdapter;
     private int count = 0;
+    private int objectCount = 30;
 
     RecyclerView jobRecyclerView;
 
@@ -51,17 +46,37 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
     public void onItemSelected(View v, int position) {
         JobListAdapter.JobListViewHolder viewHolder = (JobListAdapter.JobListViewHolder) jobRecyclerView.findViewHolderForAdapterPosition(position);
 
-
         String name = viewHolder.getDeliveredName();
         String division = viewHolder.getDeliveredDivision();
+        String ability = viewHolder.getDeliveredAbility();
+        String preparation = viewHolder.getDeliveredPreparation();
+        String summary = viewHolder.getDeliveredSummary();
         String salary = viewHolder.getDeliveredSalary();
+        String equality = viewHolder.getDeliveredEquality();
+        String potential = viewHolder.getDeliveredPotential();
+        String outlook = viewHolder.getDeliveredOutlook();
+        String environment = viewHolder.getDeliveredEnvironment();
+        String requiredAbility = viewHolder.getDeliveredRequiredAbility();
+        String knowledge = viewHolder.getDeliveredKnowledge();
+
+
 
         // to -> nav_job_detail
 
         Bundle bundle = new Bundle();
         bundle.putString("name", name);
         bundle.putString("division", division);
+        bundle.putString("ability", ability);
+        bundle.putString("preparation", preparation);
+        bundle.putString("summary", summary);
         bundle.putString("salary", salary);
+        bundle.putString("equality", equality);
+        bundle.putString("potential", potential);
+        bundle.putString("outlook", outlook);
+        bundle.putString("environment", environment);
+        bundle.putString("requiredAbility", requiredAbility);
+        bundle.putString("knowledge", knowledge);
+
 
         AppHelper.navController.navigate(R.id.action_nav_search_result_to_nav_job_detail, bundle);
 
@@ -136,17 +151,17 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
                 for (DataSnapshot snapshot : dataSnapshot.child("total_jobs").getChildren()) {
 
-                    if (count == 10) {
+                    if (count == objectCount) {
                         break;
                     } else {
-                        JobListModel jm = snapshot.getValue(JobListModel.class);
+//                        JobListModel jm = snapshot.getValue(JobListModel.class);
 
-                        if (jm != null) {
+                        if (snapshot != null) {
 //                            jobListModelArrayList.add(new JobListModel(jm.getName(), jm.getSummary(), jm.getSalary(), jm.getDivision()));
                             jobListModelArrayList.add(snapshot.getValue(JobListModel.class));
                         }
 
-                        Log.d(TAG, jobListModelArrayList.get(count).toString());
+//                        Log.d(TAG, jobListModelArrayList.get(count).toString());
 
                         count++;
                     }

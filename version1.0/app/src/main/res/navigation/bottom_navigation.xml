@@ -42,13 +42,6 @@
             android:id="@+id/action_nav_search_result_to_nav_job_detail"
             app:destination="@id/nav_job_detail">
 
-            <argument
-                android:name="name"
-                app:argType="string" />
-            <argument android:name="summary"
-                app:argType="string" />
-            <argument android:name="salary"
-                app:argType="string" />
         </action>
 
 
