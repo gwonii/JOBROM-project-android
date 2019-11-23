@@ -8,9 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gmail.gwonii.jobrom.R;
+import com.gmail.gwonii.jobrom.controller.JobListAdapter;
 
 
-public class JobDetailFragment extends Fragment {
+public class JobDetailFragment extends Fragment  {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

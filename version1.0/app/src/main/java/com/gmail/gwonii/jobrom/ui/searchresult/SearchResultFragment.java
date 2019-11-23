@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class SearchResultFragment extends Fragment {
+public class SearchResultFragment extends Fragment implements JobListAdapter.OnListItemSelectedInterface {
 
     //
     public static String TAG = "search result jobList data read";
@@ -39,9 +40,19 @@ public class SearchResultFragment extends Fragment {
     private JobListAdapter jobAdapter;
     private int count = 0;
 
+    RecyclerView jobRecyclerView;
+
 
 //    private Button moreButton;
     TextView totalJobNum;
+
+
+    // recyclerView clickListener
+    @Override
+    public void onItemSelected(View v, int position) {
+        JobListAdapter.JobListViewHolder viewHolder = (JobListAdapter.JobListViewHolder)jobRecyclerView.findViewHolderForAdapterPosition(position);
+        Toast.makeText(getContext(), "전달되었습니다" + viewHolder.getName().getText(), Toast.LENGTH_SHORT).show();
+    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,12 +66,11 @@ public class SearchResultFragment extends Fragment {
         totalJobNum = root.findViewById(R.id.tv_total_job_num);
 
 
-
         // database 연결하기
         AppHelper.databaseJob = FirebaseDatabase.getInstance().getReference();
 
         // recyclerView 연결하기
-        RecyclerView jobRecyclerView = root.findViewById(R.id.recycler_result_list);
+        jobRecyclerView = root.findViewById(R.id.recycler_result_list);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
         jobRecyclerView.setLayoutManager(mLinearLayoutManager);
 
@@ -69,7 +79,7 @@ public class SearchResultFragment extends Fragment {
         jobListModelArrayList = new ArrayList<>();
 
         //  Adapter 생성및 설정
-        jobAdapter = new JobListAdapter(jobListModelArrayList);
+        jobAdapter = new JobListAdapter(jobListModelArrayList, this);
         jobRecyclerView.setAdapter(jobAdapter);
 
 
@@ -91,6 +101,11 @@ public class SearchResultFragment extends Fragment {
 
 
         // view 관련 기능
+
+        // itemClicked
+
+
+
 
 
         // firebase에서 data 읽어오는 부분
@@ -135,7 +150,6 @@ public class SearchResultFragment extends Fragment {
 
 
         jobAdapter.notifyDataSetChanged();
-
 
 
         return root;

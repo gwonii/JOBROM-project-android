@@ -1,9 +1,6 @@
 package com.gmail.gwonii.jobrom.controller;
 
-import android.content.Context;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +19,11 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
     private ArrayList<JobListModel> jobList;
     private int count = 0;
     private OnListItemSelectedInterface mListener;
-    private Context mContext;
+
 
 
     public interface OnListItemSelectedInterface {
         void onItemSelected(View v, int position);
-    }
-
-    public JobListAdapter(Context context ,OnListItemSelectedInterface listener) {
-        this.mContext = context;
-        this.mListener = listener;
     }
 
     public class JobListViewHolder extends RecyclerView.ViewHolder {
@@ -39,6 +31,17 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         protected TextView summary;
         protected TextView salary;
 
+        public TextView getName() {
+            return name;
+        }
+
+        public TextView getSummary() {
+            return summary;
+        }
+
+        public TextView getSalary() {
+            return salary;
+        }
 
         public JobListViewHolder(View view ) {
 
@@ -47,12 +50,13 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
             this.summary = view.findViewById(R.id.tv_search_result_job_body);
             this.salary = view.findViewById(R.id.tv_search_result_job_salary);
 
-            this.mlis
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("Recyclerview", "position = "+ getAdapterPosition());
+
+                    mListener.onItemSelected(v, getAdapterPosition());
 
                 }
             });
@@ -68,8 +72,9 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         }
     }
 
-    public JobListAdapter(ArrayList<JobListModel> list) {
+    public JobListAdapter(ArrayList<JobListModel> list, OnListItemSelectedInterface listener) {
         this.jobList = list;
+        this.mListener = listener;
     }
 
     @Override
@@ -97,7 +102,6 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         viewholder.name.setText(jobList.get(position).getName());
         viewholder.summary.setText(jobList.get(position).getSummary());
         viewholder.salary.setText("평균연봉 " +jobList.get(position).getSalary() + " 만원");
-
 
     }
 
