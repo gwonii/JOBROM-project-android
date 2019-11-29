@@ -113,7 +113,6 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
             this.summary = view.findViewById(R.id.tv_search_result_job_body);
             this.salary = view.findViewById(R.id.tv_search_result_job_salary);
 
-
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -123,7 +122,6 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
 
                 }
             });
-
 
             // LongClick에 대한 처리도 할 수 있다.
             view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -135,10 +133,15 @@ public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.JobListV
         }
     }
 
+    public JobListAdapter(ArrayList<JobListModel> list) {
+        this.jobList = list;
+    }
+
     public JobListAdapter(ArrayList<JobListModel> list, OnListItemSelectedInterface listener) {
         this.jobList = list;
         this.mListener = listener;
     }
+
 
     @Override
     public JobListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {

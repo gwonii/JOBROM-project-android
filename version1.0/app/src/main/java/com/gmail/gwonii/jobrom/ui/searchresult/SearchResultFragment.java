@@ -1,6 +1,7 @@
 package com.gmail.gwonii.jobrom.ui.searchresult;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,7 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
     private ArrayList<JobModel> jobArrayList;
     private ArrayList<JobListModel> jobListModelArrayList;
     private JobListAdapter jobAdapter;
-    private int count = 0;
+    private int count;
     private int objectCount = 30;
 
     RecyclerView jobRecyclerView;
@@ -60,7 +62,6 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
         String knowledge = viewHolder.getDeliveredKnowledge();
 
 
-
         // to -> nav_job_detail
 
         Bundle bundle = new Bundle();
@@ -78,9 +79,9 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
         bundle.putString("knowledge", knowledge);
 
 
-        AppHelper.navController.navigate(R.id.action_nav_search_result_to_nav_job_detail, bundle);
-
-
+//        NavOptions
+        AppHelper.navController.navigate(R.id.nav_job_detail, bundle);
+//        AppHelper.navController.na
 
 //        SearchResultFragmentDirections.ActionNavSearchResultToNavJobDetail action = SearchResultFragmentDirections.actionNavSearchResultToNavJobDetail(name, summary, salary);
 //        AppHelper.navController.navigate(action);
@@ -102,7 +103,7 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
         // view연결하기
 //        moreButton = root.findViewById(R.id.bt_more);
         totalJobNum = root.findViewById(R.id.tv_total_job_num);
-
+        count = 0;
 
         // database 연결하기
         AppHelper.databaseJob = FirebaseDatabase.getInstance().getReference();
@@ -145,6 +146,8 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
         // firebase에서 data 읽어오는 부분
 
+
+
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -165,9 +168,9 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
                         count++;
                     }
-
-
                 }
+
+                jobRecyclerView.getAdapter().notifyDataSetChanged();
 
                 String total_num = "총 인원 " + dataSnapshot.child("total_jobs").getChildrenCount();
                 totalJobNum.setText(total_num);
@@ -188,4 +191,67 @@ public class SearchResultFragment extends Fragment implements JobListAdapter.OnL
 
         return root;
     }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//
+//        // database 연결하기
+//        AppHelper.databaseJob = FirebaseDatabase.getInstance().getReference();
+//
+//        // recyclerView 연결하기
+//        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
+//        jobRecyclerView.setLayoutManager(mLinearLayoutManager);
+//
+//        // ArrayList 생성
+//        jobArrayList = new ArrayList<>();
+//        jobListModelArrayList = new ArrayList<>();
+//
+//        //  Adapter 생성및 설정
+//        jobAdapter = new JobListAdapter(jobListModelArrayList, this);
+//        jobRecyclerView.setAdapter(jobAdapter);
+//
+//        Log.d(SearchResultFragment.class.getName(), "onResume");
+//        ValueEventListener postListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Log.d(SearchResultFragment.class.getName(), "onDataChange");
+//
+//                for (DataSnapshot snapshot : dataSnapshot.child("total_jobs").getChildren()) {
+//
+//                    if (count == objectCount) {
+//                        break;
+//                    } else {
+////                        JobListModel jm = snapshot.getValue(JobListModel.class);
+//
+//                        if (snapshot != null) {
+////                            jobListModelArrayList.add(new JobListModel(jm.getName(), jm.getSummary(), jm.getSalary(), jm.getDivision()));
+//                            jobListModelArrayList.add(snapshot.getValue(JobListModel.class));
+//                        }
+//
+////                        Log.d(TAG, jobListModelArrayList.get(count).toString());
+//
+//                        count++;
+//                    }
+//                }
+//                Log.d(SearchResultFragment.class.getName(), "jobarrayList : " + jobListModelArrayList.size());
+//
+//
+//                jobRecyclerView.getAdapter().notifyDataSetChanged();
+//
+//                String total_num = "총 인원 " + dataSnapshot.child("total_jobs").getChildrenCount();
+//                totalJobNum.setText(total_num);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Log.d(SearchResultFragment.class.getName(), "onCancelled");
+//
+//            }
+//        };
+//
+//        AppHelper.databaseJob.addValueEventListener(postListener);
+//    }
 }

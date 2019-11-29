@@ -93,4 +93,6 @@ public class JobDetailFragment extends Fragment  {
 
         return root;
     }
+
+
 }

@@ -4,26 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+<!--    <LinearLayout-->
+<!--        android:id="@+id/main_banner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:background="@drawable/box_rectangle_red_bright"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:text="@string/main_banner"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:layout_gravity="center_horizontal" />-->
+
+<!--    </LinearLayout>-->
+
+    <ImageView
         android:id="@+id/main_banner"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="vertical"
-        android:background="@drawable/box_rectangle_red_bright"
+        android:layout_height="120dp"
+        android:src="@drawable/banner_buo"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/main_banner"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center_horizontal" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <ScrollView

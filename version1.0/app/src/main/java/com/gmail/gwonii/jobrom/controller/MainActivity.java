@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        mSearch = menu.findItem(R.id.search);
+       getMenuInflater().inflate(R.menu.main, menu);
+/*
+//        mSearch = menu.findItem(R.id.search);
 
         //메뉴 아이콘 클릭했을 시 확장, 취소했을 시 축소
         mSearch.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+*/
         return true;
     }
 
