@@ -5,7 +5,6 @@
     android:id="@+id/bottom_navigation"
     app:startDestination="@+id/bottom_nav_home">
 
-
     <fragment
         android:id="@+id/bottom_nav_home"
         android:name="com.gmail.gwonii.jobrom.ui.home.HomeFragment"

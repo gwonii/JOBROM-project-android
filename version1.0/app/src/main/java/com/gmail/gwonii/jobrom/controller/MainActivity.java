@@ -1,5 +1,6 @@
 package com.gmail.gwonii.jobrom.controller;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -7,6 +8,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,8 +17,11 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import com.gmail.gwonii.jobrom.R;
 
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,10 +32,23 @@ public class MainActivity extends AppCompatActivity {
 
     private MenuItem mSearch;
 
+    SignInButton Google_Login;
+
+    private static final int RC_SIGN_IN = 1000;
+    private FirebaseAuth mAuth;
+    private GoogleApiClient mGoogleApiClient;
+
+    public static String userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // email 정보를 가지고 유저 확인하기
+        Intent intent = getIntent();
+        userEmail = intent.getExtras().getString("email");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNavigationView, AppHelper.navController);
+
+
 
         // bottomNavigation 설정
 //        setBottomNavigation();
@@ -136,4 +157,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNavigationView, AppHelper.navController);
     }
+
+
 }

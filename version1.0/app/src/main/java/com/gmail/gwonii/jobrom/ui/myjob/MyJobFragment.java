@@ -5,35 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.gmail.gwonii.jobrom.R;
-import com.gmail.gwonii.jobrom.controller.AppHelper;
+import com.gmail.gwonii.jobrom.controller.MainActivity;
 
 public class MyJobFragment extends Fragment {
 
-    private Button button;
-
+    private TextView tvUserEmail;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_myjob, container, false);
 
+        tvUserEmail = root.findViewById(R.id.myjob_user_email);
 
-//        button = root.findViewById(R.id.bt_enroll_job_data);
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AppHelper.navController.navigate(R.id.nav_job_detail);
-//
-//            }
-//        });
-
+        tvUserEmail.setText(MainActivity.userEmail);
 
 
         return root;
